@@ -1,0 +1,61 @@
+# ── Python ──
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# ── Documentation (only README is tracked) ──
+*.md
+!README.md
+
+# ── Jupyter ──
+.ipynb_checkpoints/
+*.ipynb
+
+# ── Large data files (generated or symlinked) ──
+data/pair_dataset.csv
+data/fitness_labels.csv
+data/variant_esm3_embeddings.csv
+
+# ── Colab ──
+colab/
+
+# ── Generated intermediate files ──
+data/ifp_features.csv
+data/pymol_view.pml
+
+# ── Intermediate/exploratory outputs ──
+data/allpose_features.csv
+data/claim*.csv
+data/switch_*.csv
+data/rebel_vs_loyal.csv
+data/relaxation_comparison.csv
+data/pose_stats_comparison.csv
+data/position_correlation.csv
+data/structural_features.csv
+
+# ── Exploratory scripts ──
+scripts/eval_docking.py
+scripts/eval_docking_filtered.py
+scripts/compare_relaxation.py
+scripts/compare_pose_stats.py
+scripts/recompute_gradient.py
+scripts/classify_switch.py
+scripts/analyze_switch_mechanism.py
+scripts/build_allpose_features.py
+scripts/compute_structural_features.py
+scripts/verify_biology_claims.py
+scripts/generate_pymol_script.py
+
+# ── Figures ──
+figures/
+
+# ── OS ──
+.DS_Store
+Thumbs.db
+
+# ── IDE ──
+.vscode/
+.idea/
