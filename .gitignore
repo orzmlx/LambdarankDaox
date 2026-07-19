@@ -63,3 +63,4 @@ Thumbs.db
 .vscode/
 .idea/
 data/pdb/daox_position_map.csv
+scripts/dock_vina_poc.py
