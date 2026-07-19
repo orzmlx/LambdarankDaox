@@ -59,3 +59,4 @@ Thumbs.db
 # ── IDE ──
 .vscode/
 .idea/
+data/pdb/daox_position_map.csv
