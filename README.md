@@ -1,4 +1,4 @@
-# LambdaRank Ensemble — DAOx Substrate Preference Prediction
+# DAOx Substrate Preference Prediction by XGBoost with LambdaRank
 
 Predict D-amino acid oxidase (DAOx) variant substrate preferences using ESM3 embeddings and learning-to-rank, implemented with **XGBoost** (`XGBRanker`, `objective='rank:pairwise'`).
 
@@ -28,9 +28,12 @@ python3 lambdarank_ensemble.py --n-seeds 7  # 7-model ensemble
 Each enzyme variant must rank 5 substrates (D-Ala, D-Asn, D-Gln, D-Met, D-Phe) by fitness. We treat this as a **learning-to-rank** problem:
 
 1. For each `(variant, substrate)` pair, build a feature vector: `ESM3 PCA(128d) + substrate encoding(144d) + position prior(1d) = 273d`
+   - ESM3 PCA 128d: 1536-dim mean-pooled embedding → PCA to 128
+   - Substrate encoding 144d: 7 basic properties (side chain atoms, hydropathy, volume, charge, aromaticity, sulfur, amide) + 9 RDKit molecular descriptors (Molecular Weight, TPSA, logP, HBD/HBA, rotatable bonds, rings, sp3 fraction, heavy atoms) + 128 Morgan fingerprint (ECFP4, radius=2)
+   - Position prior 1d: training-set mean fitness for this position × substrate pair
 2. Train XGBoost XGBRanker with pairwise logistic loss — 5 substrates per variant form one ranking group
 3. Ensemble 7 models with different random seeds
-4. Adaptive blend with position prior
+
 
 > **Note**: Docking features (~400 columns) exist in `pair_dataset.csv` but are **not used** by the model. Adding them consistently degrades performance (tested extensively). The 273-dim baseline is optimal.
 
@@ -38,7 +41,7 @@ Each enzyme variant must rank 5 substrates (D-Ala, D-Asn, D-Gln, D-Met, D-Phe) b
 
 | File | Description |
 |------|-------------|
-| `data/pair_dataset.csv` | 2,073 curated variants × 5 substrates (includes ESM3 + docking columns; model uses only ESM3) |
+| `data/pair_dataset.csv` | 2,073 curated variants × 5 substrates, with ESM3 embeddings (1536d). Also contains docking columns (~400d) which are **not used** by the model. |
 | `data/fitness_labels.csv` | 5,800 variants fitness data (used in `--full` mode with ESM3 embeddings) |
 | `data/variant_esm3_embeddings.csv` | ESM3 embeddings for all 5,730 variants (`--full` mode) |
 | `data/substrate_encodings.csv` | 144-dim features: 7 physicochemical + 9 RDKit + 128 Morgan FP |

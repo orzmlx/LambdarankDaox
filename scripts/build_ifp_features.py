@@ -19,8 +19,10 @@ import numpy as np, pandas as pd
 from scipy.spatial import KDTree
 
 ROOT = Path(__file__).resolve().parent.parent
-POSE_DIR = Path("/Users/liuxi/Desktop/MyAdventureStory/Yitian_Zhou_Interview/pdb/top_pair_poses")
-VAR_DIR = Path("/Users/liuxi/Desktop/MyAdventureStory/Yitian_Zhou_Interview/pdb/variants")
+# External data (too large to include in repo)
+_PDB_ROOT = ROOT.parent / "DAOx" / "pdb"
+POSE_DIR = _PDB_ROOT / "top_pair_poses"
+VAR_DIR = _PDB_ROOT / "variants"
 DATA = ROOT / "data"
 
 # ── Load position map ──

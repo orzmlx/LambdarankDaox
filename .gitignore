@@ -22,6 +22,9 @@ data/variant_esm3_embeddings.csv
 # ── Colab ──
 colab/
 
+# ── Position map (large reference file) ──
+data/pdb/daox_position_map.csv
+
 # ── Generated intermediate files ──
 data/ifp_features.csv
 data/pymol_view.pml

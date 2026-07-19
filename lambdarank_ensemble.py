@@ -12,9 +12,9 @@ Usage:
 
 Data requirements (see README for details):
     data/pair_dataset.csv              # 2073 variants × 5 substrates with ESM3 embeddings
-    data/substrate_encodings.csv       # 161-dim chemical features for 5 substrates
+    data/substrate_encodings.csv       # 144-dim chemical features for 5 substrates
     data/fitness_labels.csv            # (--full mode only) 5800 variants fitness
-    data/variant_esm3_embeddings.csv   # (--full mode only) ESM3 for all 5800 variants
+    data/variant_esm3_embeddings.csv   # (--full mode only) ESM3 for all 5730 variants
 
 Reference:
     Liu et al., "LambdaRank Ensemble for Enzyme Substrate Preference Prediction", 2026
@@ -97,7 +97,7 @@ def build_features(data, var_names, subs_all, ecols, data_dir, n_pca=N_PCA):
     return X_esm_pca, esm_idx, sub_feat, var_pos, var_subs
 
 
-# ── Single-fold evaluation ─────────────────────────────────
+#  Single-fold evaluation 
 def evaluate_fold(tr_v, te_v, data, X_esm_pca, esm_idx, sub_feat,
                   var_pos, var_subs, subs_all, seeds):
     """Train LambdaRank ensemble on training variants, evaluate on test variants."""
